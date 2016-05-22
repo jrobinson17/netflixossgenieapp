@@ -31,76 +31,76 @@ cd ../..
 ## PLATFORM ##
 
 cd asgard/1.5.1
-docker build -t jrobinson/asgard:1.5.1 .
+docker build -t netflixoss/asgard:1.5.1 .
 cd ../..
 
 cd eureka
 cd 1.1.142
-docker build -t jrobinson/eureka:1.1.142 .
+docker build -t netflixoss/eureka:1.1.142 .
 cd ..
 cd 1.1.147
-docker build -t jrobinson/eureka:1.1.147 .
+docker build -t netflixoss/eureka:1.1.147 .
 cd ..
 cd ..
 
 cd exhibitor-zookeeper
-docker build -t jrobinson/exhibitor:1.5.2 .
+docker build -t netflixoss/exhibitor:1.5.2 .
 cd ..
 
 cd zuul
-docker build -t jrobinson/zuul:1.0.28 .
+docker build -t netflixoss/zuul:1.0.28 .
 cd ..
 
 cd hello-netflix-oss
-docker build -t jrobinson/hello-netflix-oss:1.0.27 .
+docker build -t netflixoss/hello-netflix-oss:1.0.27 .
 cd ..
 
 ## SECURITY MONKEY ##
 
 cd security_monkey/0.3.4/security_monkey-api
-docker build -t jrobinson/security_monkey-api:0.3.4 .
+docker build -t netflixoss/security_monkey-api:0.3.4 .
 cd ../../..
 
 cd security_monkey/0.3.4/security_monkey-apiinit
-docker build -t jrobinson/security_monkey-apiinit:0.3.4 .
+docker build -t netflixoss/security_monkey-apiinit:0.3.4 .
 cd ../../..
 
 cd security_monkey/0.3.4/security_monkey-nginx
-docker build -t jrobinson/security_monkey-nginx:0.3.4 .
+docker build -t netflixoss/security_monkey-nginx:0.3.4 .
 cd ../../..
 
 cd security_monkey/0.3.4/security_monkey-scheduler
-docker build -t jrobinson/security_monkey-scheduler:0.3.4 .
+docker build -t netflixoss/security_monkey-scheduler:0.3.4 .
 cd ../../..
 
 ## SKETCHY ##
 
 cd sketchy/sketchy_api
-docker build -t jrobinson/sketchy-api:1.0.0 .
+docker build -t netflixoss/sketchy-api:1.0.0 .
 cd ../..
 
 cd sketchy/sketchy_nginx
-docker build -t jrobinson/sketchy-nginx:1.0.0 .
+docker build -t netflixoss/sketchy-nginx:1.0.0 .
 cd ../..
 
 ## EDDA ##
 cd edda/2.1
-docker build -t jrobinson/edda:2.1 .
+docker build -t netflixoss/edda:2.1 .
 cd ../..
 
 ## Genie ##
 
 cd genie/2.0.0
-docker build -t jrobinson/genie:2.0.0 .
+docker build -t netflixoss/genie:2.0.0 .
 cd ../..
 
 cd genie/2.1.0
-docker build -t jrobinson/genie:2.1.0 .
+docker build -t netflixoss/genie:2.1.0 .
 cd ../..
 
 cd genie/2.2.1
-docker build -t jrobinson/genie:2.2.1 .
-cd ../.o
+docker build -t netflixoss/genie:2.2.1 .
+cd ../..
 
 ## Sleepy Puppy ##
 
