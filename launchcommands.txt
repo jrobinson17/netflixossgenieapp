@@ -1,0 +1,60 @@
+docker run -d --name asgard -v `pwd`/asgard/Config.groovy.mine:/root/.asgard/Config.groovy netflixoss/asgard:1.5
+docker run -d --name exhibitor netflixoss/exhibitor:1.5.2
+docker run -d --name eureka -d netflixoss/eureka:1.1.142
+docker run -d --name hello-netflix-oss --link eureka:eureka netflixoss/hello-netflix-oss:1.0.27	
+docker run -e "origin.zuul.client.DeploymentContextBasedVipAddresses=HELLO-NETFLIX-OSS" -d --name zuul --link eureka:eureka netflixoss/zuul:1.0.28
+
+http://EXHIBITOR:8080/exhibitor/v1/ui/index.html
+
+http://EUREKA:8080/eureka/
+
+http://HELLONETFLIXOSS:8080/
+http://HELLONETFLIXOSS:8077/
+
+http://ZUUL:8080/
+
+http://ASGARD:8080/
+
+## SECURITY_MONKEY ##
+# See the wiki page for more information.
+
+docker run -d --name security_monkey-postgres postgres:9.3.5
+docker run -i -t --name security_monkey-apiinit --link security_monkey-postgres:postgres netflixoss/security_monkey-apiinit:0.3.4
+
+cp boto.cfg.example boto.cfg
+
+docker run -i -d --name security_monkey-api --link security_monkey-postgres:postgres -v `pwd`/boto.cfg:/etc/boto.cfg:ro netflixoss/security_monkey-api:0.3.4
+docker run -i -d --name security_monkey-nginx --link security_monkey-api:smapi netflixoss/security_monkey-nginx:0.3.4
+
+https://SECURITY_MONKEY_NGINX/register
+https://SECURITY_MONKEY_NGINX/#/createaccount
+
+docker run -i -d --name security_monkey-scheduler --link security_monkey-postgres:postgres -v `pwd`/boto.cfg:/etc/boto.cfg:ro netflixoss/security_monkey-scheduler:0.3.4
+
+https://SECURITY_MONKEY_NGINX/#/
+
+## Sketchy ##
+docker run -d --name sketchy_redis redis:2.8.9
+docker run -d --name sketchy_postgres postgres:9.3.5
+docker run -t --name sketchy_dbinit --link sketchy_postgres:sketchy_postgres netflixoss/sketchy-api:1.0.0 init_db
+docker run -d --name sketchy_api --link sketchy_redis:sketchy_redis --link sketchy_postgres:sketchy_postgres netflixoss/sketchy-api:1.0.0 celery_api
+docker run -d --name sketchy_nginx --link sketchy_api:sketchyapi netflixoss/sketchy-nginx:1.0.0
+
+https://SKETCHY_NGINX/eager?url=http://google.com&type=sketch
+
+## Edda ##
+docker run -d --name edda -v `pwd`/edda/2.1/edda.properties.mine:/tomcat/webapps/ROOT/WEB-INF/classes/edda.properties netflixoss/edda:2.1
+
+## Genie ##
+# See wiki page for more information and how to run example
+# https://github.com/Netflix-Skunkworks/zerotodocker/wiki/Genie
+
+docker run --name mysql-genie -e MYSQL_ROOT_PASSWORD=genie -e MYSQL_DATABASE=genie -d mysql:5.6.21
+docker run --name genie --link mysql-genie:mysql-genie -d netflixoss/genie:2.2.1
+
+## Sleepy Puppy ##
+# Sleepy Puppy uses docker-compose (previously fig.sh) to launch
+
+cd sleepy-puppy/
+docker-compose up
+
